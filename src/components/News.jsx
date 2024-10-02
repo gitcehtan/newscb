@@ -5,11 +5,29 @@ export class News extends Component {
   render() {
     return (
       <>
-        <div>This my newscb application that will show the exact news </div>
-        <NewsItem/>
-        <NewsItem/>
-        <NewsItem/>
-        <NewsItem/>
+        <h1>NewsCB</h1> 
+
+    <div className='m-4'>
+    <div className='row'>
+            <div className="col-md-3 my-2">
+               <NewsItem title="my title" description="my desc" imageUrl="https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?cs=srgb&dl=pexels-souvenirpixels-417074.jpg&fm=jpg"/>
+            </div>
+            <div className="col-md-3 my-2">
+               <NewsItem title="my title" description="my desc" imageUrl="https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?cs=srgb&dl=pexels-souvenirpixels-417074.jpg&fm=jpg"/>
+            </div>
+            <div className="col-md-3 my-2">
+               <NewsItem title="my title" description="my desc" imageUrl="https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?cs=srgb&dl=pexels-souvenirpixels-417074.jpg&fm=jpg"/>
+            </div>
+            <div className="col-md-3 my-2">
+               <NewsItem title="my title" description="my desc" imageUrl="https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?cs=srgb&dl=pexels-souvenirpixels-417074.jpg&fm=jpg"/>
+            </div>
+            <div className="col-md-3 my-2">
+               <NewsItem title="my title" description="my desc" imageUrl="https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?cs=srgb&dl=pexels-souvenirpixels-417074.jpg&fm=jpg"/>
+            </div>
+        </div>
+
+    </div>
+       
       </>
 
     )
