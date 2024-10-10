@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import NewsItem from './NewsItem';
+import Spinner from './Spinner';
+import { Link } from 'react-router-dom';
 
 export class News extends Component {
 
@@ -139,12 +141,16 @@ export class News extends Component {
 
 
  async componentDidMount(){
-    const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=510a2563332d4f7c8ab47a0b7744639b&page=${this.state.page}&pageSize=20`;
+    const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=510a2563332d4f7c8ab47a0b7744639b&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+    this.setState({loading:true});
     const data = await fetch(url);
     
     const result = await data.json();
   
-    this.setState({articles:result.articles});
+    this.setState({
+      articles:result.articles,
+      loading: false
+    });
   }
 
   constructor(){
@@ -159,22 +165,26 @@ export class News extends Component {
 
 
   handlePrevBtn = async() => {
-    const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=510a2563332d4f7c8ab47a0b7744639b&page=${this.state.page-1}&pageSize=20`;
+    const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=510a2563332d4f7c8ab47a0b7744639b&page=${this.state.page-1}&pageSize=${this.props.pageSize}`;
+
+    this.setState({loading:true});
+
     const data = await fetch(url);
     
     const result = await data.json();
   
     this.setState({
       articles:result.articles,
-      page: this.state.page-1
+      page: this.state.page-1,
+      loading: false
     });
 
   }
  
   handleNextBtn = async() => {
-    const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=510a2563332d4f7c8ab47a0b7744639b&page=${this.state.page+1}&pageSize=20`;
+    const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=510a2563332d4f7c8ab47a0b7744639b&page=${this.state.page+1}&pageSize=${this.props.pageSize}`;
 
-
+    this.setState({loading:true});
 
     const data = await fetch(url);
     
@@ -183,7 +193,8 @@ export class News extends Component {
     this.setState({
       articles:result.articles,
       page: this.state.page+1,
-      totalResults: result.totalResults
+      totalResults: result.totalResults,
+      loading: false
     });
   }
 
@@ -194,8 +205,10 @@ export class News extends Component {
     return (
       <>
         <h1>NewsCB</h1> 
-
+    
     <div className='m-4'>
+
+      {this.state.loading && <Spinner/>}
       <div className='row'>
          {this.state.articles.map((article)=>(
           <div className="col-md-3 my-2" key={article.url+Math.random(100)}>
@@ -210,7 +223,7 @@ export class News extends Component {
       </div>
       <div className='d-flex justify-content-between'>
         <button disabled={this.state.page==1} type="button" onClick={this.handlePrevBtn} class="btn btn-secondary">&larr; Previous</button>
-        <button disabled={Math.ceil(this.state.totalResults/20) < this.state.page+1} type="button" onClick={this.handleNextBtn} class="btn btn-secondary">Next &rarr;</button>
+        <button disabled={Math.ceil(this.state.totalResults/ (this.props.pageSize)) < this.state.page+1} type="button" onClick={this.handleNextBtn} class="btn btn-secondary">Next &rarr;</button>
       </div>
     </div>
        

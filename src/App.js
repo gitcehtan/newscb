@@ -11,7 +11,7 @@ export class App extends Component {
       <div>  
       <Navbar/>
       {/* <h1>NewsCB</h1>  */}
-      <News/>
+      <News pageSize={5}/>
       </div>
     )
   }

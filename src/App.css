@@ -8,3 +8,9 @@
   bottom: 10px;
   /* background-color: red; */
 }
+
+.spinner{
+  position: absolute;
+  top: 60%;
+  left: 50%;
+}
